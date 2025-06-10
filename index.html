@@ -102,20 +102,43 @@
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="slide active slide-down">Hai Cantik 😳</div>
-    <div class="slide slide-left">Aku cuma mau bilang satu hal penting banget...</div>
-    <div class="slide slide-down">Jangan Lupa Selalu Bahagia 💖</div>
-    <div class="slide slide-left">Eh Jan Lupa Mandi JUga wkwk.</div>
-    <div class="slide slide-left">biar ga bau ihhh.</div>
-    <div class="slide slide-down">Semangat ya, aku selalu ada buat kamu 😘</div>
-    <div class="slide">
-      <div class="big-love">❤</div>
-      <div class="i-love-you">I love you</div>
-    </div>
-
-    <button class="next-btn" onclick="nextSlide()">Klik Lanjut</button>
+ <div class="card">
+  <!-- Slide 1: Gambar + Teks -->
+  <div class="slide active slide-down">
+    <img src="https://imgur.com/a/aqEWwk1" alt="Foto Cantik" style="max-width: 100%; border-radius: 15px; margin-bottom: 20px;">
+    <div>Hai Cantik 😳</div>
   </div>
+
+  <!-- Slide 2: Gambar + Teks -->
+  <div class="slide slide-left">
+    <img src="https://imgur.com/a/eXZYQUj.jpg" alt="Pesan Penting" style="max-width: 100%; border-radius: 15px; margin-bottom: 20px;">
+    <div>Aku cuma mau bilang satu hal penting banget...</div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide slide-down">
+      <img src="https://imgur.com/a/rObVJHK" alt="Makan" style="max-width: 100%; border-radius: 15px; margin-bottom: 20px;">
+    <div>Aku Makan dulu deh laper😳</div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide slide-left">Eh Jan Lupa Mandi JUga wkwk.</div>
+
+  <!-- Slide 5 -->
+  <div class="slide slide-left">biar ga bau ihhh.</div>
+
+  <!-- Slide 6 -->
+  <div class="slide slide-down">Semangat ya, aku selalu ada buat kamu 😘</div>
+
+  <!-- Slide 7: Love Besar + Teks -->
+  <div class="slide">
+    <div class="big-love">❤</div>
+    <div class="i-love-you">I love you</div>
+  </div>
+
+  <!-- Tombol Next -->
+  <button class="next-btn" onclick="nextSlide()">Klik Lanjut</button>
+</div>
 
   <script>
     let current = 0;
