@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pesan Buat Kamu</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #e0f7fa; /* Biru muda */
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background-color: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .slide {
+      display: none;
+      font-size: 28px;
+      color: #e91e63;
+      font-weight: bold;
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+
+    .slide-left {
+      transform: translateX(-50px);
+    }
+
+    .slide-down {
+      transform: translateY(30px);
+    }
+
+    .slide.active {
+      display: block;
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+    }
+
+    .next-btn {
+      font-size: 16px;           /* ukuran lebih kecil */
+      margin-top: 30px;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(135deg, #ff4081, #e91e63);
+      padding: 10px 24px;        /* padding disesuaikan */
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      box-shadow: 0 6px 15px rgba(233, 30, 99, 0.5);
+      transition: background 0.4s, box-shadow 0.4s, transform 0.2s;
+      user-select: none;
+    }
+
+    .next-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #e91e63, #c2185b);
+      box-shadow: 0 8px 20px rgba(194, 24, 91, 0.7);
+      transform: translateY(-3px);
+    }
+
+    .next-btn:active:not(:disabled) {
+      transform: translateY(1px);
+      box-shadow: 0 4px 12px rgba(194, 24, 91, 0.6);
+    }
+
+    .next-btn:disabled {
+      background-color: #bbb;
+      box-shadow: none;
+      cursor: default;
+      color: #666;
+      transform: none;
+    }
+
+    .big-love {
+      font-size: 60px;
+      animation: float 1.5s ease-in-out infinite;
+      margin: 20px 0 10px;
+    }
+
+    .i-love-you {
+      font-size: 30px;
+      color: #e91e63;
+      font-weight: bold;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="slide active slide-down">Hai Cantik 😳</div>
+    <div class="slide slide-left">Aku cuma mau bilang satu hal penting banget...</div>
+    <div class="slide slide-down">Jangan Lupa Selalu Bahagia 💖</div>
+    <div class="slide slide-left">Eh Jan Lupa Mandi JUga wkwk.</div>
+    <div class="slide slide-left">biar ga bau ihhh.</div>
+    <div class="slide slide-down">Semangat ya, aku selalu ada buat kamu 😘</div>
+    <div class="slide">
+      <div class="big-love">❤</div>
+      <div class="i-love-you">I love you</div>
+    </div>
+
+    <button class="next-btn" onclick="nextSlide()">Klik Lanjut</button>
+  </div>
+
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const btn = document.querySelector('.next-btn');
+
+    function nextSlide() {
+      if (current < slides.length - 1) {
+        slides[current].classList.remove('active');
+        current++;
+        slides[current].classList.add('active');
+
+        if (current === slides.length - 1) {
+          btn.textContent = "Selesai";
+          btn.disabled = false;
+        }
+      } else if (current === slides.length - 1) {
+        // Saat tombol selesai diklik, coba tutup window atau redirect
+        if (window.close) {
+          window.close();
+        }
+        window.location.href = "about:blank";
+      }
+    }
+  </script>
+</body>
+</html>
