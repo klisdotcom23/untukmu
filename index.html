@@ -5,6 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pesan Buat Kamu</title>
   <style>
+    /* Tambahan animasi arah */
+.slide-left {
+  transform: translateX(-50px);
+}
+
+.slide-right {
+  transform: translateX(50px);
+}
+
+.slide-down {
+  transform: translateY(30px);
+}
+
+.slide-up {
+  transform: translateY(-30px);
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  position: static;
+  transform: translateX(0) translateY(0);
+}
+
     html, body {
       margin: 0;
       padding: 0;
@@ -129,7 +153,7 @@
     <!-- Slide 4 -->
 <div class="slide slide-left">
   <img src="https://i.imgur.com/2k0fbqr.gif" alt="Gif lucu mandi" style="max-width: 100%; border-radius: 15px; margin-bottom: 20px;">
-  <div>Eh Jan Lupa Mandi JUga wkwk.</div>
+  <div>Eh Jan Lupa Mandi Juga wkwk.</div>
 </div> 
 
 
@@ -152,8 +176,13 @@
 </div> 
 
     <!-- Tombol -->
-    <button class="next-btn" onclick="nextSlide()">Klik Lanjut</button>
-  </div>
+   <button class="next-btn" onclick="nextSlide()">→</button>
+    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 30px;">
+  <button class="next-btn" onclick="prevSlide('right')">⬅️</button>
+  <button class="next-btn" onclick="nextSlide('down')">⬇️</button>
+  <button class="next-btn" onclick="nextSlide('left')">➡️</button>
+
+</div> 
 
   <!-- Musik latar (opsional, ganti link kalau kamu punya musik sendiri) -->
   <audio autoplay loop>
@@ -161,27 +190,64 @@
     Browser kamu tidak mendukung audio.
   </audio>
 
-  <script>
-    let current = 0;
-    const slides = document.querySelectorAll('.slide');
-    const btn = document.querySelector('.next-btn');
+ <script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
 
-    function nextSlide() {
-      if (current < slides.length - 1) {
-        slides[current].classList.remove('active');
-        current++;
-        slides[current].classList.add('active');
+  function applyDirectionClass(slide, direction) {
+    slide.classList.remove('slide-left', 'slide-right', 'slide-down', 'slide-up');
+    if (direction === 'left') slide.classList.add('slide-left');
+    if (direction === 'right') slide.classList.add('slide-right');
+    if (direction === 'down') slide.classList.add('slide-down');
+    if (direction === 'up') slide.classList.add('slide-up');
+  }
 
-        if (current === slides.length - 1) {
-          btn.textContent = "Ulang Lagi";
-        }
-      } else {
-        slides[current].classList.remove('active');
-        current = 0;
-        slides[current].classList.add('active');
-        btn.textContent = "Klik Lanjut";
+  function nextSlide(direction = 'left') {
+    if (current < slides.length - 1) {
+      slides[current].classList.remove('active');
+      current++;
+      applyDirectionClass(slides[current], direction);
+      slides[current].classList.add('active');
+
+      // Ganti tombol terakhir jadi "✔️"
+      const btns = document.querySelectorAll('.next-btn');
+      if (current === slides.length - 1) {
+        btns.forEach(btn => {
+          if (btn.textContent.includes('➡️')) {
+            btn.textContent = "✔️";
+          }
+        });
       }
+    } else {
+      // Slide terakhir -> keluar
+      window.location.href = "about:blank";
     }
-  </script>
+  }
+
+  function prevSlide(direction = 'right') {
+    if (current > 0) {
+      slides[current].classList.remove('active');
+      current--;
+      applyDirectionClass(slides[current], direction);
+      slides[current].classList.add('active');
+    }
+  }
+
+  // Navigasi pakai keyboard
+  document.addEventListener('keydown', function(event) {
+    switch(event.key) {
+      case 'ArrowRight':
+        nextSlide('left');
+        break;
+      case 'ArrowLeft':
+        prevSlide('right');
+        break;
+      case 'ArrowDown':
+        nextSlide('down');
+        break;
+    }
+  });
+</script>
+
 </body>
 </html>
